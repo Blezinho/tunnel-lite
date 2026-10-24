@@ -12,13 +12,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
 
       - name: Aceitar licencas do Android SDK
-        run: yes | sdkmanager --licenses > /dev/null || true
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Instalar NDK
-        run: sdkmanager --install "ndk;25.2.9519653"
+        run: "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;25.2.9519653" "platforms;android-33" "build-tools;33.0.2"
 
       - name: Compilar tun2socks (hev-socks5-tunnel)
         run: |
